@@ -4,6 +4,7 @@ Changelog
 * dev
  * Updated Dependencies and Upgraded PHPUnit
  * Added more Tools, Formatted Code
+ * Added Typesafety to Functions and Test
 
 Pre-Fork Changelog
 =========

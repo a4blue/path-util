@@ -1,9 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace A4blue\PathUtil;
 
 use InvalidArgumentException;
-use Webmozart\Assert\Assert;
 
 final class Url
 {
@@ -22,11 +23,11 @@ final class Url
      * @throws InvalidArgumentException If the URL and base URL does
      *                                  not match.
      */
-    public static function makeRelative($url, $baseUrl)
+    public static function makeRelative(string $url, string $baseUrl): string
     {
-        Assert::string($url, 'The URL must be a string. Got: %s');
-        Assert::string($baseUrl, 'The base URL must be a string. Got: %s');
-        Assert::contains($baseUrl, '://', '%s is not an absolute Url.');
+        if (false === \strpos($baseUrl, '://')) {
+            throw new InvalidArgumentException(\sprintf('"%s" is not an absolute Url.', $baseUrl));
+        }
 
         list($baseHost, $basePath) = self::split($baseUrl);
 
@@ -69,7 +70,7 @@ final class Url
      *
      * @throws InvalidArgumentException If $url is not a URL.
      */
-    private static function split($url)
+    private static function split(string $url): array
     {
         $pos = strpos($url, '://');
         $scheme = substr($url, 0, $pos + 3);

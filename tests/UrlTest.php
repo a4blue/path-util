@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace A4blue\PathUtil\Tests;
 
 use InvalidArgumentException;
@@ -10,9 +12,8 @@ class UrlTest extends TestCase
 {
     /**
      * @dataProvider provideMakeRelativeTests
-     * @covers A4blue\PathUtil\Url
      */
-    public function testMakeRelative($absolutePath, $basePath, $relativePath)
+    public function testMakeRelative(string $absolutePath, string $basePath, string $relativePath): void
     {
         $host = 'http://example.com';
 
@@ -24,9 +25,8 @@ class UrlTest extends TestCase
 
     /**
      * @dataProvider provideMakeRelativeIsAlreadyRelativeTests
-     * @covers A4blue\PathUtil\Url
      */
-    public function testMakeRelativeIsAlreadyRelative($absolutePath, $basePath, $relativePath)
+    public function testMakeRelativeIsAlreadyRelative(string $absolutePath, string $basePath, string $relativePath): void
     {
         $host = 'http://example.com';
 
@@ -36,9 +36,8 @@ class UrlTest extends TestCase
 
     /**
      * @dataProvider provideMakeRelativeTests
-     * @covers A4blue\PathUtil\Url
      */
-    public function testMakeRelativeWithFullUrl($absolutePath, $basePath, $relativePath)
+    public function testMakeRelativeWithFullUrl(string $absolutePath, string $basePath, string $relativePath): void
     {
         $host = 'ftp://user:password@example.com:8080';
 
@@ -46,49 +45,31 @@ class UrlTest extends TestCase
         $this->assertSame($relativePath, $relative);
     }
 
-    public function testMakeRelativeFailsIfInvalidUrl()
-    {
-        $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('The URL must be a string. Got: array');
-        Url::makeRelative([], 'http://example.com/webmozart/puli');
-    }
-
-    public function testMakeRelativeFailsIfInvalidBaseUrl()
-    {
-        $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('The base URL must be a string. Got: array');
-        Url::makeRelative('http://example.com/webmozart/puli/css/style.css', []);
-    }
-
-    public function testMakeRelativeFailsIfBaseUrlNoUrl()
+    public function testMakeRelativeFailsIfBaseUrlNoUrl(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('"webmozart/puli" is not an absolute Url.');
         Url::makeRelative('http://example.com/webmozart/puli/css/style.css', 'webmozart/puli');
     }
 
-    public function testMakeRelativeFailsIfBaseUrlEmpty()
+    public function testMakeRelativeFailsIfBaseUrlEmpty(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('"" is not an absolute Url.');
         Url::makeRelative('http://example.com/webmozart/puli/css/style.css', '');
     }
 
-    public function testMakeRelativeFailsIfBaseUrlNull()
-    {
-        $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('The base URL must be a string. Got: NULL');
-        Url::makeRelative('http://example.com/webmozart/puli/css/style.css', null);
-    }
-
-    public function testMakeRelativeFailsIfDifferentDomains()
+    public function testMakeRelativeFailsIfDifferentDomains(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('The URL "http://example.com" cannot be made relative to "http://example2.com" since their host names are different.');
         Url::makeRelative('http://example.com/webmozart/puli/css/style.css', 'http://example2.com/webmozart/puli');
     }
 
-    public function provideMakeRelativeTests()
+    /**
+     * @return array<string[]>
+     */
+    public function provideMakeRelativeTests(): array
     {
         return [
 
@@ -126,7 +107,10 @@ class UrlTest extends TestCase
         ];
     }
 
-    public function provideMakeRelativeIsAlreadyRelativeTests()
+    /**
+     * @return array<string[]>
+     */
+    public function provideMakeRelativeIsAlreadyRelativeTests(): array
     {
         return [
             ['css/style.css', '/webmozart/puli', 'css/style.css'],

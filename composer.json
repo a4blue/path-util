@@ -15,8 +15,7 @@
         }
     ],
     "require": {
-        "php": "^7.3|^8.0",
-        "webmozart/assert": "~1.0"
+        "php": "^7.3|^8.0"
     },
     "autoload": {
         "psr-4": {
@@ -39,7 +38,8 @@
         "lint": "parallel-lint src tests",
         "test": "phpunit",
         "cs": "php-cs-fixer fix -v --dry-run --using-cache no",
-        "cs-fix": "php-cs-fixer fix --using-cache no"
+        "cs-fix": "php-cs-fixer fix --using-cache no",
+        "phpstan": "phpstan analyse"
     },
     "config": {
         "sort-packages": true

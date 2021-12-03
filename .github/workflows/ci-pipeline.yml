@@ -37,5 +37,17 @@ jobs:
       - name: "Composer Update"
         run: "composer update --no-interaction --no-progress"
 
+      - name: "Validate composer.json"
+        run: "composer composer-schema-validate"
+
+      - name: "Lint PHP Code"
+        run: "composer lint"
+
+      - name: "PHP CS Fixer Formatting Check"
+        run: "composer cs"
+
+      - name: "PHPStan Analyse"
+        run: "composer phpstan"
+
       - name: "Unit Test"
-        run: "vendor/bin/phpunit"
+        run: "composer test"
