@@ -87,6 +87,6 @@ final class Url
         // At this point, we have $scheme, $host and $path
         $root = $scheme.$host;
 
-        return array($root, $url);
+        return [$root, $url];
     }
 }

@@ -3,6 +3,7 @@ Changelog
 
 * dev
  * Updated Dependencies and Upgraded PHPUnit
+ * Added more Tools, Formatted Code
 
 Pre-Fork Changelog
 =========

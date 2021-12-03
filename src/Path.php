@@ -11,19 +11,19 @@ final class Path
     /**
      * The number of buffer entries that triggers a cleanup operation.
      */
-    const CLEANUP_THRESHOLD = 1250;
+    public const CLEANUP_THRESHOLD = 1250;
 
     /**
      * The buffer size after the cleanup operation.
      */
-    const CLEANUP_SIZE = 1000;
+    public const CLEANUP_SIZE = 1000;
 
     /**
      * Buffers input/output of {@link canonicalize()}.
      *
      * @var array
      */
-    private static $buffer = array();
+    private static $buffer = [];
 
     /**
      * The size of the buffer.
@@ -82,7 +82,7 @@ final class Path
         list($root, $pathWithoutRoot) = self::split($path);
 
         $parts = explode('/', $pathWithoutRoot);
-        $canonicalParts = array();
+        $canonicalParts = [];
 
         // Collapse "." and "..", if possible
         foreach ($parts as $part) {
@@ -394,7 +394,7 @@ final class Path
             return false;
         }
 
-        $extensions = is_object($extensions) ? array($extensions) : (array) $extensions;
+        $extensions = is_object($extensions) ? [$extensions] : (array) $extensions;
 
         Assert::allString($extensions, 'The extensions must be strings. Got: %s');
 
@@ -846,12 +846,13 @@ final class Path
             if (null === $finalPath) {
                 // For first part we keep slashes, like '/top', 'C:\' or 'phar://'
                 $finalPath = $path;
-                $wasScheme = (strpos($path, '://') !== false);
+                $wasScheme = (false !== strpos($path, '://'));
+
                 continue;
             }
 
             // Only add slash if previous part didn't end with '/' or '\'
-            if (!in_array(substr($finalPath, -1), array('/', '\\'))) {
+            if (!in_array(substr($finalPath, -1), ['/', '\\'])) {
                 $finalPath .= '/';
             }
 
@@ -933,7 +934,7 @@ final class Path
     private static function split($path)
     {
         if ('' === $path) {
-            return array('', '');
+            return ['', ''];
         }
 
         // Remember scheme as part of the root, if any
@@ -962,7 +963,7 @@ final class Path
             }
         }
 
-        return array($root, $path);
+        return [$root, $path];
     }
 
     /**

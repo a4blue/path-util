@@ -50,14 +50,14 @@ class UrlTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('The URL must be a string. Got: array');
-        Url::makeRelative(array(), 'http://example.com/webmozart/puli');
+        Url::makeRelative([], 'http://example.com/webmozart/puli');
     }
 
     public function testMakeRelativeFailsIfInvalidBaseUrl()
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('The base URL must be a string. Got: array');
-        Url::makeRelative('http://example.com/webmozart/puli/css/style.css', array());
+        Url::makeRelative('http://example.com/webmozart/puli/css/style.css', []);
     }
 
     public function testMakeRelativeFailsIfBaseUrlNoUrl()
@@ -81,7 +81,6 @@ class UrlTest extends TestCase
         Url::makeRelative('http://example.com/webmozart/puli/css/style.css', null);
     }
 
-
     public function testMakeRelativeFailsIfDifferentDomains()
     {
         $this->expectException(InvalidArgumentException::class);
@@ -91,58 +90,58 @@ class UrlTest extends TestCase
 
     public function provideMakeRelativeTests()
     {
-        return array(
+        return [
 
-            array('/webmozart/puli/css/style.css', '/webmozart/puli', 'css/style.css'),
-            array('/webmozart/puli/css/style.css?key=value&key2=value', '/webmozart/puli', 'css/style.css?key=value&key2=value'),
-            array('/webmozart/puli/css/style.css?key[]=value&key[]=value', '/webmozart/puli', 'css/style.css?key[]=value&key[]=value'),
-            array('/webmozart/css/style.css', '/webmozart/puli', '../css/style.css'),
-            array('/css/style.css', '/webmozart/puli', '../../css/style.css'),
-            array('/', '/', ''),
+            ['/webmozart/puli/css/style.css', '/webmozart/puli', 'css/style.css'],
+            ['/webmozart/puli/css/style.css?key=value&key2=value', '/webmozart/puli', 'css/style.css?key=value&key2=value'],
+            ['/webmozart/puli/css/style.css?key[]=value&key[]=value', '/webmozart/puli', 'css/style.css?key[]=value&key[]=value'],
+            ['/webmozart/css/style.css', '/webmozart/puli', '../css/style.css'],
+            ['/css/style.css', '/webmozart/puli', '../../css/style.css'],
+            ['/', '/', ''],
 
             // relative to root
-            array('/css/style.css', '/', 'css/style.css'),
+            ['/css/style.css', '/', 'css/style.css'],
 
             // same sub directories in different base directories
-            array('/puli/css/style.css', '/webmozart/css', '../../puli/css/style.css'),
+            ['/puli/css/style.css', '/webmozart/css', '../../puli/css/style.css'],
 
-            array('/webmozart/puli/./css/style.css', '/webmozart/puli', 'css/style.css'),
-            array('/webmozart/puli/../css/style.css', '/webmozart/puli', '../css/style.css'),
-            array('/webmozart/puli/.././css/style.css', '/webmozart/puli', '../css/style.css'),
-            array('/webmozart/puli/./../css/style.css', '/webmozart/puli', '../css/style.css'),
-            array('/webmozart/puli/../../css/style.css', '/webmozart/puli', '../../css/style.css'),
-            array('/webmozart/puli/css/style.css', '/webmozart/./puli', 'css/style.css'),
-            array('/webmozart/puli/css/style.css', '/webmozart/../puli', '../webmozart/puli/css/style.css'),
-            array('/webmozart/puli/css/style.css', '/webmozart/./../puli', '../webmozart/puli/css/style.css'),
-            array('/webmozart/puli/css/style.css', '/webmozart/.././puli', '../webmozart/puli/css/style.css'),
-            array('/webmozart/puli/css/style.css', '/webmozart/../../puli', '../webmozart/puli/css/style.css'),
+            ['/webmozart/puli/./css/style.css', '/webmozart/puli', 'css/style.css'],
+            ['/webmozart/puli/../css/style.css', '/webmozart/puli', '../css/style.css'],
+            ['/webmozart/puli/.././css/style.css', '/webmozart/puli', '../css/style.css'],
+            ['/webmozart/puli/./../css/style.css', '/webmozart/puli', '../css/style.css'],
+            ['/webmozart/puli/../../css/style.css', '/webmozart/puli', '../../css/style.css'],
+            ['/webmozart/puli/css/style.css', '/webmozart/./puli', 'css/style.css'],
+            ['/webmozart/puli/css/style.css', '/webmozart/../puli', '../webmozart/puli/css/style.css'],
+            ['/webmozart/puli/css/style.css', '/webmozart/./../puli', '../webmozart/puli/css/style.css'],
+            ['/webmozart/puli/css/style.css', '/webmozart/.././puli', '../webmozart/puli/css/style.css'],
+            ['/webmozart/puli/css/style.css', '/webmozart/../../puli', '../webmozart/puli/css/style.css'],
 
             // first argument shorter than second
-            array('/css', '/webmozart/puli', '../../css'),
+            ['/css', '/webmozart/puli', '../../css'],
 
             // second argument shorter than first
-            array('/webmozart/puli', '/css', '../webmozart/puli'),
+            ['/webmozart/puli', '/css', '../webmozart/puli'],
 
-            array('', '', ''),
-        );
+            ['', '', ''],
+        ];
     }
 
     public function provideMakeRelativeIsAlreadyRelativeTests()
     {
-        return array(
-            array('css/style.css', '/webmozart/puli', 'css/style.css'),
-            array('css/style.css', '', 'css/style.css'),
-            array('css/../style.css', '', 'style.css'),
-            array('css/./style.css', '', 'css/style.css'),
-            array('../style.css', '/', 'style.css'),
-            array('./style.css', '/', 'style.css'),
-            array('../../style.css', '/', 'style.css'),
-            array('../../style.css', '', 'style.css'),
-            array('./style.css', '', 'style.css'),
-            array('../style.css', '', 'style.css'),
-            array('./../style.css', '', 'style.css'),
-            array('css/./../style.css', '', 'style.css'),
-            array('css//style.css', '', 'css/style.css'),
-        );
+        return [
+            ['css/style.css', '/webmozart/puli', 'css/style.css'],
+            ['css/style.css', '', 'css/style.css'],
+            ['css/../style.css', '', 'style.css'],
+            ['css/./style.css', '', 'css/style.css'],
+            ['../style.css', '/', 'style.css'],
+            ['./style.css', '/', 'style.css'],
+            ['../../style.css', '/', 'style.css'],
+            ['../../style.css', '', 'style.css'],
+            ['./style.css', '', 'style.css'],
+            ['../style.css', '', 'style.css'],
+            ['./../style.css', '', 'style.css'],
+            ['css/./../style.css', '', 'style.css'],
+            ['css//style.css', '', 'css/style.css'],
+        ];
     }
 }

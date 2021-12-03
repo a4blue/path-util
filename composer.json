@@ -29,6 +29,19 @@
         }
     },
     "require-dev": {
-        "phpunit/phpunit": "^9.5"
+        "phpunit/phpunit": "^9.5",
+        "friendsofphp/php-cs-fixer": "^3.3",
+        "phpstan/phpstan": "^1.2",
+        "php-parallel-lint/php-parallel-lint": "^1.3"
+    },
+    "scripts": {
+        "composer-schema-validate": "@composer validate --no-check-all --strict",
+        "lint": "parallel-lint src tests",
+        "test": "phpunit",
+        "cs": "php-cs-fixer fix -v --dry-run --using-cache no",
+        "cs-fix": "php-cs-fixer fix --using-cache no"
+    },
+    "config": {
+        "sort-packages": true
     }
 }
