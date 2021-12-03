@@ -927,7 +927,7 @@ final class Path
     private static function toLower(string $str): string
     {
         if (function_exists('mb_strtolower')) {
-            return mb_strtolower($str, mb_detect_encoding($str) ?: null);
+            return mb_strtolower($str, mb_detect_encoding($str) ?: 'UTF-8');
         }
 
         return strtolower($str);
