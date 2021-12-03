@@ -1,6 +1,12 @@
 Changelog
 =========
 
+* dev
+ * Updated Dependencies and Upgraded PHPUnit
+
+Pre-Fork Changelog
+=========
+
 * 2.3.0 (2015-12-17)
 
  * added `Url::makeRelative()` for calculating relative paths between URLs

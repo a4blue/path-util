@@ -1,33 +1,10 @@
 File Path Utility
 =================
 
-[![Build Status](https://travis-ci.org/webmozart/path-util.svg?branch=master)](https://travis-ci.org/webmozart/path-util)
-[![Build status](https://ci.appveyor.com/api/projects/status/d5uuypr6p162gpxf/branch/master?svg=true)](https://ci.appveyor.com/project/webmozart/path-util/branch/master)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/webmozart/path-util/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/webmozart/path-util/?branch=master)
-[![Latest Stable Version](https://poser.pugx.org/webmozart/path-util/v/stable.svg)](https://packagist.org/packages/webmozart/path-util)
-[![Total Downloads](https://poser.pugx.org/webmozart/path-util/downloads.svg)](https://packagist.org/packages/webmozart/path-util)
-[![Dependency Status](https://www.versioneye.com/php/webmozart:path-util/2.3.0/badge.svg)](https://www.versioneye.com/php/webmozart:path-util/2.3.0)
-
-Latest release: [2.3.0](https://packagist.org/packages/webmozart/path-util#2.3.0)
-
-PHP >= 5.3.3
+PHP >= 7.3
 
 This package provides robust, cross-platform utility functions for normalizing,
 comparing and modifying file paths and URLs.
-
-Deprecation
------------
-
-This package has been merged into [the Symfony Filesystem Component 5.4]. It is not maintained anymore.
-
-Installation
-------------
-
-The utility can be installed with [Composer]:
-
-```
-$ composer require webmozart/path-util
-```
 
 Usage
 -----
@@ -35,7 +12,7 @@ Usage
 Use the `Path` class to handle file paths:
 
 ```php
-use Webmozart\PathUtil\Path;
+use A4blue\PathUtil\Path;
 
 echo Path::canonicalize('/var/www/vhost/webmozart/../config.ini');
 // => /var/www/vhost/config.ini
@@ -96,7 +73,7 @@ Path::getHomeDirectory();
 Use the `Url` class to handle URLs:
 
 ```php
-use Webmozart\PathUtil\Url;
+use A4blue\PathUtil\Url;
 
 echo Url::makeRelative('http://example.com/css/style.css', 'http://example.com/puli');
 // => ../css/style.css
@@ -107,10 +84,18 @@ echo Url::makeRelative('http://cdn.example.com/css/style.css', 'http://example.c
 
 Learn more in the [Documentation] and the [API Docs].
 
+Motivation
+-------
+
+There are some Libraries that still use the original Code, which is deprecated, but don't want to switch to symfony/filesystem .
+In order to minimize Variations of the Code being copied to these Projects, i try to Hard-Fork the project and to maintain it,
+so that these can potentially use this library
+
 Authors
 -------
 
-* [Bernhard Schussek] a.k.a. [@webmozart]
+* [Bernhard Schussek] a.k.a. [@webmozart] Original Author
+* [Alexander Ratajczak] a.k.a. [@a4blue] 
 * [The Community Contributors]
 
 Documentation
@@ -126,24 +111,7 @@ Contributions are always welcome!
 * Report any bugs or issues you find on the [issue tracker].
 * You can grab the source code at the [Git repository].
 
-Support
--------
-
-If you are having problems, send a mail to bschussek@gmail.com or shout out to
-[@webmozart] on Twitter.
-
 License
 -------
 
 All contents of this package are licensed under the [MIT license].
-
-[Bernhard Schussek]: http://webmozarts.com
-[The Community Contributors]: https://github.com/webmozart/path-util/graphs/contributors
-[Composer]: https://getcomposer.org
-[Documentation]: docs/usage.md
-[API Docs]: https://webmozart.github.io/path-util/api/latest/class-Webmozart.PathUtil.Path.html
-[issue tracker]: https://github.com/webmozart/path-util/issues
-[Git repository]: https://github.com/webmozart/path-util
-[@webmozart]: https://twitter.com/webmozart
-[MIT license]: LICENSE
-[the Symfony Filesystem Component 5.4]: https://github.com/symfony/filesystem/tree/5.4

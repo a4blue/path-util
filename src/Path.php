@@ -1,32 +1,11 @@
 <?php
 
-/*
- * This file is part of the webmozart/path-util package.
- *
- * (c) Bernhard Schussek <bschussek@gmail.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
-namespace Webmozart\PathUtil;
+namespace A4blue\PathUtil;
 
 use InvalidArgumentException;
 use RuntimeException;
 use Webmozart\Assert\Assert;
 
-/**
- * Contains utility methods for handling path strings.
- *
- * The methods in this class are able to deal with both UNIX and Windows paths
- * with both forward and backward slashes. All methods return normalized parts
- * containing only forward slashes and no excess "." and ".." segments.
- *
- * @since  1.0
- *
- * @author Bernhard Schussek <bschussek@gmail.com>
- * @author Thomas Schulz <mail@king2500.net>
- */
 final class Path
 {
     /**
