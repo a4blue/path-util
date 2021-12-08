@@ -1,10 +1,21 @@
+[![CI Pipeline](https://github.com/a4blue/path-util/actions/workflows/ci-pipeline.yml/badge.svg)](https://github.com/a4blue/path-util/actions/workflows/ci-pipeline.yml)
+
 File Path Utility
 =================
 
-PHP >= 7.3
+PHP ^7.3|~8.0|~8.1
 
 This package provides robust, cross-platform utility functions for normalizing,
 comparing and modifying file paths and URLs.
+
+Motivation
+-------
+
+There are some Libraries that still use the original Code, which is deprecated, but don't want to switch to symfony/filesystem .
+In order to minimize Variations of the Code being copied to these Projects, i try to Hard-Fork the project and to maintain it,
+so that these can potentially use this library
+
+Version 1 aims to be a drop-in replacement for webmozart/file-path
 
 Usage
 -----
@@ -82,36 +93,21 @@ echo Url::makeRelative('http://cdn.example.com/css/style.css', 'http://example.c
 // => http://cdn.example.com/css/style.css
 ```
 
-Learn more in the [Documentation] and the [API Docs].
-
-Motivation
--------
-
-There are some Libraries that still use the original Code, which is deprecated, but don't want to switch to symfony/filesystem .
-In order to minimize Variations of the Code being copied to these Projects, i try to Hard-Fork the project and to maintain it,
-so that these can potentially use this library
-
 Authors
 -------
 
-* [Bernhard Schussek] a.k.a. [@webmozart] Original Author
-* [Alexander Ratajczak] a.k.a. [@a4blue] 
-* [The Community Contributors]
-
-Documentation
--------------
-
-Read the [Documentation] if you want to learn more about the contained functions.
+* [Bernhard Schussek] a.k.a. [@webmozart](https://github.com/webmozarts) Original Author
+* [Alexander Ratajczak] a.k.a. [@a4blue](https://github.com/a4blue)
 
 Contribute
 ----------
 
 Contributions are always welcome!
 
-* Report any bugs or issues you find on the [issue tracker].
-* You can grab the source code at the [Git repository].
+* Report any bugs or issues you find on the [issue tracker](https://github.com/a4blue/path-util/issues).
+* You can grab the source code at the [Git repository](https://github.com/a4blue/path-util).
 
 License
 -------
 
-All contents of this package are licensed under the [MIT license].
+All contents of this package are licensed under the MIT license.
