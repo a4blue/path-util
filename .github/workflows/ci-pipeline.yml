@@ -45,6 +45,8 @@ jobs:
         run: "composer lint"
 
       - name: "PHP CS Fixer Formatting Check"
+        env:
+          PHP_CS_FIXER_IGNORE_ENV: true
         run: "composer cs"
 
       - name: "PHPStan Analyse"
